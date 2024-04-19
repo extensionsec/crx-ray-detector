@@ -1,0 +1,57 @@
+service_patterns:
+  strict:
+    Google:
+      pattern: AIzaSy[A-Za-z0-9_-]{33}
+      subservices:
+        GeminiPro:
+          keywords:
+            - generativelanguage.googleapis.com
+    OpenAI: \bsk-[A-Za-z0-9]{48}\b
+    LangChain: \bls__[a-zA-Z0-9]{32}\b
+    GooseAI: \bsk-[A-Za-z0-9]{32}\b
+    OctoAI: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjNkMjMzOTQ5In0\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+
+    Jina: jina_[a-zA-Z0-9]{60}\b
+    WhyLabs: |-
+      \b[a-zA-Z0-9]{10}\.[a-zA-Z0-9]{53}:org-[a-zA-Z0-9]{6}
+    Anthropic: \bsk-ant-api\d{2}-[a-zA-Z0-9_-]{95}
+    HuggingFace: \bhf_[a-zA-Z0-9]{34}\b
+    AnyScale: \bsecret_[a-zA-Z0-9]{26}\b
+
+  broad:
+    patterns:
+      - Authorization["'`]?\s*:\s*["'`]?\s*(?:Token|Bearer)\s+([a-zA-Z0-9\.\-_:]{10,})
+      - |-
+        [&?][a-zA-Z0-9\-_]*(?:(?i:key|api|token|secret|passwd|password|auth|access))[a-z0-9\-_]*=(?:\${encodeURIComponent\(")?([a-zA-Z0-9\.\-_:]{10,})(?:"\)})?[&\/'"`]
+      #? Trying to match string variables; too many false-positives
+      # - |-
+      #   (?:(?i:key|api|token|secret|passwd|password|auth|access))[a-z0-9_]*\s*[=:]\s*["'`]([a-zA-Z0-9\.\-_:]{10,})
+    
+    services:
+      ChatGLM:
+        pattern: |-
+          \b[0-9a-f]{32}\.[A-Za-z0-9]{16}\b
+        keywords: open.bigmodel.cn/api
+
+      EdenAI:
+        pattern: \b[A-Za-z0-9]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\b
+        keywords: api.edenai.run
+
+      NLPCloud:
+        pattern: |-
+          \b[0-9a-f]{40}\b
+        keywords: api.nlpcloud.io
+
+      WenXin:
+        pattern: |-
+          \b[a-zA-Z0-9]{32}\b
+        keywords: wenxin.baidu.com/moduleApi
+
+      AI21:
+        pattern: |-
+          \b[a-zA-Z0-9]{32}\b
+        keywords: api.ai21.com
+
+      Cohere:
+        pattern: |-
+          \b[a-zA-Z0-9]{40}\b
+        keywords: api.cohere.ai
