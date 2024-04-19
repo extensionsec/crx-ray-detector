@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This tool is used to check whether the AI platform sensitive API Keys exist in the extension files (Crx, Xpi) of mainstream browsers (Chrome, Edge, Firefox).
+This tool is used to check whether the AI platform sensitive API Keys exist in the extension files (crx, xpi) of mainstream browsers (Chrome, Edge, Firefox).
 
 ## Install
 
@@ -18,8 +18,8 @@ Then you should use the `pip install -r requirements.txt` to install the package
 
 Currently this tool supports two extended types of scans：
 
-- Crx: Chrome and Edge extension file type
-- Xpi: Firefox extension file type
+- crx: Chrome and Edge extension file type
+- xpi: Firefox extension file type
 
 
 ```
@@ -30,8 +30,8 @@ Scan the API Keys of all AI platforms present in the extension file
 Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -t TYPE, --type=TYPE  extension type to be scanned (only supports Crx and
-                        Xpi)
+  -t TYPE, --type=TYPE  extension type to be scanned (only supports crx and
+                        xpi)
   -f FILE, --file=FILE  extension file to be scanned
   -o OUTPUT_FILE, --output=OUTPUT_FILE
                         output file to save the scan results

@@ -62,6 +62,11 @@ def search_api_keys_in_extension_file(extension_file_path: Path, extension_type:
                 matches = api_pattern.find_matches_with_context(content_string)
 
                 for service_name, token, context in matches:
+                    
+                    # NOTE: removed the unknown service pattern
+                    if service_name is "Unknown":
+                        continue
+
                     # Highlight token in context
                     highlighted_context = context.replace(token, f"\033[91m{token}\033[0m")
 
