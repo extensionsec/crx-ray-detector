@@ -18,22 +18,23 @@ class CommandLineParser:
 
     def setup_parser(self) -> OptionParser:
         """Set up the command line option parser."""
-        usage = "python main.py -t <type> -f <file> [-o <output_file>]"
-        version = "1.0.0"
+        usage = "python main.py -f <file> [-o <output_file>]"
+        version = "1.0.1"
         description = "Scan the API Keys of all AI platforms present in the extension file"
         parser = OptionParser(usage=usage, version=version, description=description, add_help_option=True)
-        parser.add_option("-t", "--type", type="string", dest="type", help="extension type to be scanned (only supports Crx and Xpi)")
         parser.add_option("-f", "--file", type="string", dest="file", help="extension file to be scanned")
         parser.add_option("-o", "--output", type="string", dest="output_file", help="output file to save the scan results")
         return parser
 
 
-def search_api_keys_in_extension_file(extension_file_path: Path, extension_type: str, output_file=None):
+def search_api_keys_in_extension_file(extension_file_path: Path, output_file=None):
     """Search API keys in an extension file based on its type."""
+ 
     try:
-        if extension_type == "crx":
+        extension_type = extension_file_path.suffix
+        if extension_type == ".crx":
             extension = CrxFile(extension_file_path, filter_list=None)
-        elif extension_type == "xpi":
+        elif extension_type == ".xpi":
             extension = XpiFile(extension_file_path, filter_list=None)
         else:
             print("Unsupported file type")
@@ -64,7 +65,7 @@ def search_api_keys_in_extension_file(extension_file_path: Path, extension_type:
                 for service_name, token, context in matches:
                     
                     # NOTE: removed the unknown service pattern
-                    if service_name is "Unknown":
+                    if service_name == "Unknown":
                         continue
 
                     # Highlight token in context
@@ -94,7 +95,6 @@ def search_api_keys_in_extension_file(extension_file_path: Path, extension_type:
 def main():
     """Main function to handle the scanning process."""
     parser = CommandLineParser()
-    extension_type = parser.options.type
     file_path = parser.options.file
     output_file = parser.options.output_file
 
@@ -102,11 +102,7 @@ def main():
         print("Please provide a file path.")
         exit(0)
 
-    if extension_type not in ["crx", "xpi"]:
-        print("Invalid extension type. Only 'crx' and 'xpi' are supported.")
-        exit(0)
-
-    search_api_keys_in_extension_file(Path(file_path), extension_type, output_file)
+    search_api_keys_in_extension_file(Path(file_path), output_file)
 
 
 if __name__ == "__main__":

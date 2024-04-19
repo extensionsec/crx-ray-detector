@@ -23,15 +23,13 @@ Currently this tool supports two extended types of scans：
 
 
 ```
-Usage: python main.py -t <type> -f <file> [-o <output_file>]
+Usage: python main.py -f <file> [-o <output_file>]
 
 Scan the API Keys of all AI platforms present in the extension file
 
 Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  -t TYPE, --type=TYPE  extension type to be scanned (only supports crx and
-                        xpi)
   -f FILE, --file=FILE  extension file to be scanned
   -o OUTPUT_FILE, --output=OUTPUT_FILE
                         output file to save the scan results
@@ -40,13 +38,13 @@ Options:
 Example:
 
 ```sh
-python main.py -t crx -f crx_secret.crx
+python main.py -f crx_secret.crx
 ```
 
 The above command will scan the contents of crx_secret.crx and give the results：
 
 ```
-$ python main.py -t crx -f crx_secret.crx -o a.txt
+$ python main.py -f crx_secret.crx -o a.txt
 Searching in crx_secret.crx ...
 Found API Keys
   Service Name: OpenAI
@@ -75,6 +73,6 @@ Found API Keys
 You can also use the following command to store the scan results in a file you specify:
 
 ```sh
-python main.py -t crx -f crx_secret.crx -o result.txt
+python main.py -f crx_secret.crx -o result.txt
 ```
 
