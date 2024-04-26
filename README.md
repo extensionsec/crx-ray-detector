@@ -9,7 +9,7 @@ This tool is used to check whether the AI platform sensitive API Keys exist in t
 You can download this tool from github through the following git command:
 
 ```sh
-git clone https://github.com/extensionsec/crx-ray.git
+git clone https://github.com/extensionsec/crx-ray-detector.git
 ```
 
 Then you should use the `pip install -r requirements.txt` to install the package.
